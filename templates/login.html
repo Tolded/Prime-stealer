@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Admin Panel - Login</title>
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+        
+
+    </head>
+    <body>
+        <script>
+            document.getElementById('login-form').addEventListener('submit', async function(event) {
+                event.preventDefault(); // Prevent the default form submission
+    
+                const formData = new FormData(this);
+                const response = await fetch(this.action, {
+                    method: this.method,
+                    body: formData
+                });
+    
+                if (response.ok) {
+                    const result = await response.text();
+                    if (result === 'Login successful!') {
+                        window.location.href = '/'; // Redirect on successful login
+                    } else {
+                        // Show SweetAlert2 error alert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Invalid credentials, please try again.'
+                        });
+                    }
+                } else {
+                    // Handle server errors
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'An error occurred. Please try again later.'
+                    });
+                }
+            });
+        </script>
+        
+        <style>
+            * {
+    font-family: 'Inconsolata';
+}
+
+body {
+    background: #131416;
+    font-size: 20px;
+    color: #fff;
+}
+
+#content {
+    padding: 30px;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+}
+#sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: -240px; /* Initially hide the sidebar */
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: left 0.3s; /* Add transition for smooth animation */
+    border-right: 3px solid #ffffff64;
+}
+
+#sidenav:hover {
+    left: 0px;
+}
+
+#sidenav .active {
+    color: #f1f1f1;
+}
+
+#sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+  
+#sidenav a:hover {
+    color: #f1f1f1;
+}
+  
+@media screen and (max-height: 450px) {
+    #sidenav {padding-top: 15px;}
+    #sidenav a {font-size: 18px;}
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+::-webkit-scrollbar-track {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+background: rgba(255, 255, 255, 0.164); 
+border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: rgba(255, 255, 255, 0.164); 
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+td, th {
+    border-bottom: 1px solid #fff;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+td.action {
+    border: 1px solid #fff;
+    background-color: #ffffff1f;
+    transition: 200ms;
+    padding: 0;
+}
+
+td.action:hover {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+td.action a {
+    display: block;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+tr {
+    background-color: #131416;
+}
+  
+tr:nth-child(even) {
+    background-color: #262728;
+}
+
+td {
+    border-left: 1px solid #fff;
+}
+
+td.active {
+    color: #46a111;
+    font-weight: 800;
+}
+
+td.inactive {
+    color: #b50909;
+    font-weight: 800;
+}
+
+h3 {
+    color: #ffffff4a;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 10px;
+}
+            .username {
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                font-size: 22px;
+            }
+            #content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 30px;
+    overflow-y: scroll;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: calc(100% - 70px);
+}
+
+#main {
+    background-color: #131416;
+    border-radius: 5px;
+    padding: 100px;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+label {
+    font-size: 25px;
+}
+
+input {
+    background-color: #ffffff0f;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 20px;
+}
+
+input:focus {
+    outline: none;
+}
+
+input:focus {
+    border: none;
+}
+
+button {
+    width: 100%;
+    background-color: #ffffff0f;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 200ms;
+}
+
+button:hover {
+    background-color: #ffffff00;
+}
+
+#content {
+    width: fit-content !important;
+}
+        </style>
+
+        <div class="username">Logged in as: <strong></strong></div>
+        
+        <div id="content">
+            
+    <div id="main">
+        <div id="card">
+            <img width="200px" src="{{ url_for('static', filename='favicon.ico') }}">
+            <h1>Prime STEALER</h1>
+            <form action="/login_post" method="post" autocomplete="off">
+                <div>
+                    <label>Username:</label>
+                    <input type="text" autocomplete="off" name="username">
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <input type="password" name="password">
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+<a>Contact </a> <a href = "https://t.me/5krq">@5krq</a> <a> on Telegram to get Access. </a>
+
+        </div>
+        <script>
+            const navname = "";
+            window.addEventListener("load", () => {
+                let sidenav = document.getElementById("sidenav");
+                if (sidenav == null) return;
+                
+                let children = sidenav.children
+                for (i = 0; i < children.length; i++) {
+                    let child = children[i];
+                    if (navname == child.innerHTML) child.classList.add("active");
+                }
+            });
+        </script>
+        
+    </body>
+</html>

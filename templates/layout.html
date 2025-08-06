@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Cloud</title>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".menu-btn");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            buttons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+        });
+    });
+});
+function updateTime() {
+    const timeElement = document.getElementById("current-time");
+    const now = new Date();
+    const timeString = now.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    timeElement.textContent = timeString;
+}
+
+setInterval(updateTime, 1000);
+updateTime();
+</script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #0a0a0a;
+    display: flex;
+    height: 100vh;
+    align-items: flex-start; /* 맨 위 정렬 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    padding: 20px;
+    gap: 20px; /* 사이드바와 타이틀바 사이 여백 */
+}
+
+/* 🔹 사이드바 (왼쪽 고정) */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #111;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 60px; /* 사이드바 너비 고정 */
+    min-height: 30px; /* 최소 높이 */
+    position: fixed; /* 화면 왼쪽 고정 */
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 메뉴 버튼 */
+.menu-btn {
+    width: 50px;
+    height: 50px;
+    background: none;
+    left: -10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    color: #666;
+    font-size: 20px;
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #aaa;
+}
+
+.menu-btn.active {
+    background: #222;
+    color: #ddd;
+}
+
+/* 🔹 툴팁 효과 */
+.menu-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: calc(100% + 10px);
+    background: rgba(255, 255, 255, 0.1);
+    color: #bbb;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: 0.2s ease-in-out;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+
+
+.menu-btn:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 🔹 타이틀 바 (중앙 정렬) */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-left: 80px; /* 사이드바 공간 확보 */
+}
+
+.title-bar {
+    width: 90%;
+    max-width: 900px;
+    height: 60px; /* 높이 고정 */
+    background: #111;
+    border-radius: 10px;
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #aaa;
+    font-size: 18px;
+}
+
+.left i {
+    color: #888;
+    font-size: 22px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.time {
+    background: #222;
+    color: #bbb;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.right i {
+    color: #777;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.right i:hover {
+    color: #aaa;
+}
+
+.logout {
+    color: #b33;
+}
+
+.logout:hover {
+    color: #e55;
+}
+
+</style>
+<body>
+    <div class="sidebar">
+        <a href="http://127.0.0.1:5000/main" class="menu-btn active" data-tooltip="Home">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="http://127.0.0.1:5000/files" class="menu-btn" data-tooltip="Database">
+            <i class="fa-solid fa-file"></i>
+        </a>
+        <a href="http://127.0.0.1:5000/links" class="menu-btn" data-tooltip="Obfuscator">
+            <i class="fa-solid fa-lock"></i>
+        </a>
+        <a href="http://127.0.0.1:5000/settings" class="menu-btn" data-tooltip="Settings">
+            <i class="fas fa-cog"></i>
+        </a>
+    </div>
+    <div class="container">
+        <div class="title-bar">
+            <div class="left">
+                <i class="fa-solid fa-p"></i>
+                <span class="title">Prime</span>
+                <span class="time" id="current-time">--:--</span>
+                <span class="title">Welcome to prime city User [ {{ workerid }} ]</span>
+            </div>
+            <div class="right">
+                <i class="fas fa-user"></i>
+                <i class="fas fa-sign-out-alt logout"></i>
+            </div>
+        </div>
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+
+</html>

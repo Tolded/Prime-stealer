@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Folder: {{ folder_name }}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .list-group-item {
+    color: white !important; /* Override Bootstrap's color */
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Custom background */
+}
+</style>
+<body class="bg-dark text-white">
+    <div class="container mt-5">
+        <h1>Your Folder: {{ folder_name }}</h1>
+        <ul class="list-group list-group-flush">
+            {% if folder_contents %}
+                {% for item in folder_contents %}
+                    <li class="list-group-item">
+                        {% if '.' in item %}  {# Check if it's a file #}
+                            <a href="{{ url_for('view_file', workerid=workerid, folder_name=folder_name, file_name=item) }}" class="text-decoration-none text-white">{{ item }}</a>
+                        {% else %}  {# Assuming it's a folder #}
+                            <a href="{{ url_for('view_folder', workerid=workerid, folder_name=item) }}" class="text-decoration-none text-white">{{ item }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="list-group-item text-muted">No files found in this folder.</li>
+            {% endif %}
+        </ul>
+        <a href="{{ url_for('panel') }}" class="btn btn-light mt-3">Back to Panel</a>
+    </div>
+</body>
+</html>

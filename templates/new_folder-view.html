@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Folder: {{ folder_name }}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- iziToast CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+</head>
+<style>
+    /* 기존 스타일 그대로 유지 */
+    .list-group-item {
+        color: white !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
+        position: relative;
+    }
+    .action-icons {
+        position: absolute;
+        right: 10px;
+        display: none;
+    }
+    .list-group-item:hover .action-icons {
+        display: inline-block;
+    }
+    .action-icons i {
+        margin-left: 10px;
+        color: #ccc;
+        cursor: pointer;
+    }
+    .action-icons i:hover {
+        color: white;
+    }
+</style>
+<body class="bg-dark text-white">
+    <div class="container mt-5">
+        <h1>Your Folder: {{ folder_name }}</h1>
+        <ul class="list-group list-group-flush">
+            {% if folder_contents %}
+                {% for item in folder_contents %}
+                    <li class="list-group-item">
+                        {% if '.' in item %}  {# 파일일 경우 #}
+                            <a href="{{ url_for('view_file', workerid=workerid, folder_name=folder_name, file_name=item) }}" class="text-decoration-none text-white">{{ item }}</a>
+                            <div class="action-icons">
+                                <!-- 삭제 버튼 -->
+                                <a href="{{ url_for('delete_file', workerid=workerid, folder_name=folder_name, file_name=item, action='delete') }}" title="Delete" onclick="return confirm('Are you sure you want to delete this file?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                                <!-- 다운로드 버튼 -->
+                                <a href="{{ url_for('download_file', workerid=workerid, folder_name=folder_name, file_name=item, action='download') }}" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <!-- 압축 해제 버튼 (zip 파일일 경우) -->
+                                {% if item.endswith('.zip') %}
+                                    <a href="{{ url_for('extract_zip', workerid=workerid, folder_name=folder_name, file_name=item, action='extract') }}" title="Extract">
+                                        <i class="fas fa-file-archive"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% else %}  {# 폴더일 경우 #}
+                            <a href="{{ url_for('view_folder', workerid=workerid, folder_name=item) }}" class="text-decoration-none text-white">{{ item }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="list-group-item text-muted">No files found in this folder.</li>
+            {% endif %}
+        </ul>
+        <a href="{{ url_for('panel') }}" class="btn btn-light mt-3">Back to Panel</a>
+    </div>
+
+    <!-- Bootstrap JS, iziToast JS 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // URL에서 작업 완료 파라미터 읽어오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const action = urlParams.get('action');
+
+        // 작업에 따라 iziToast 알림 표시
+        if (action === 'delete') {
+            iziToast.success({
+                title: 'Deleted',
+                message: 'File has been successfully deleted!',
+                position: 'topRight'
+            });
+        } else if (action === 'download') {
+            iziToast.info({
+                title: 'Download',
+                message: 'Your file is being downloaded!',
+                position: 'topRight'
+            });
+        } else if (action === 'extract') {
+            iziToast.success({
+                title: 'Extracted',
+                message: 'Zip file has been successfully extracted!',
+                position: 'topRight'
+            });
+        }
+    </script>
+</body>
+</html>

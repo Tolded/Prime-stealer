@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View File - {{ file_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark text-white">
+    <div class="container mt-5">
+        <h1>Contents of {{ file_name }}</h1>
+        <pre class="bg-secondary p-3">{{ file_content }}</pre>
+        <a href="{{ url_for('view_folder', workerid=workerid, folder_name=folder_name) }}" class="btn btn-light mt-3">Back to Folder</a>
+    </div>
+</body>
+</html>

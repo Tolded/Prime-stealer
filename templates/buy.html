@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime-service</title>
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap);
+
+.nav-links, nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links, img, nav {
+  display: flex;
+}
+
+.features .card span, header .content h1, section .header {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.link a, footer, header, header .image {
+  position: relative;
+}
+
+.btn, .link a::after {
+  background-color: #4f09ff;
+}
+
+img, select {
+  width: 100%;
+}
+
+* {
+  cursor: url('../images/cursor.png'), default;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  background-color: #18181b;
+}
+
+nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem 1rem;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.nav-logo {
+  max-width: 100px;
+}
+
+.nav-links {
+  list-style: none;
+  gap: 3rem;
+}
+
+.features, .pricing, footer, header {
+  display: grid;
+  gap: 2rem;
+}
+
+.link a {
+  padding-bottom: .75rem;
+  color: #fff;
+}
+
+.link a::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0;
+  bottom: 0;
+  left: 0;
+  transition: .3s;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn:hover, .features .card span {
+  background-color: #064682;
+}
+
+.link a:hover::after {
+  width: 70%;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  color: #fff;
+  border-radius: 5px;
+  cursor: url('../images/cursor.png'), default;
+  transition: .3s;
+}
+
+.card, .features .card, .pricing .card, select, select option {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  
+}
+
+.blur {
+  position: absolute;
+  box-shadow: 0 0 1000px 50px #001c9b;
+  z-index: -100;
+}
+
+header {
+  padding-top: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+header .content h4 {
+  margin-bottom: 1rem;
+  color: #ccc;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+header .content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 4rem;
+}
+
+header .content h1 span {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px #fff;
+}
+
+header .content p {
+  margin-bottom: 2rem;
+  color: #ccc;
+}
+
+header .image img {
+  max-width: 600px;
+  margin: auto;
+}
+
+section .header {
+  text-align: center;
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
+.features {
+  margin-top: 4rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.features .card {
+  padding: 1rem;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  transition: .3s;
+}
+
+.features .card:hover {
+  background-color: #323232;
+  border-color: #fff;
+}
+
+.features .card span {
+  display: inline-block;
+  padding: 2px 9px;
+  font-size: 1.75rem;
+  border-radius: 5px;
+}
+
+.features .card h4 {
+  margin-bottom: .5rem;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.features .card p {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.features .card a {
+  color: #fff;
+  transition: .3s;
+}
+
+.features .card a:hover {
+  color: #1704c6;
+}
+
+.sub-header {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  color: #ccc;
+}
+
+.pricing {
+  margin-top: 4rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.pricing .card {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  transition: .3s;
+}
+
+.pricing .card:hover {
+  background-color: #323232;
+  border-color: #c9c9c9;
+}
+
+.pricing .card .content {
+  flex: 1;
+  margin-bottom: 2rem;
+}
+
+.pricing .card h4 {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.pricing .card h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.pricing .card p {
+  color: #fff;
+  margin-bottom: .75rem;
+}
+
+.pricing .card p i {
+  color: #ccc;
+  font-size: 1.2rem;
+  margin-right: .3rem;
+}
+
+.pricing .card button {
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid #fff;
+}
+
+.pricing .card button:hover {
+  background-color: #ff09e6;
+  border-color: #ff09e6;
+}
+
+footer {
+  grid-template-columns: 400px repeat(3, 1fr);
+}
+
+footer .column .logo {
+  max-width: 100px;
+  margin-bottom: 2rem;
+}
+
+footer .column p {
+  color: #ccc;
+  margin: 2rem;
+}
+
+.card, .copyright, footer .column h4, select, select option {
+  color: #fff;
+}
+
+footer .column .socials {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+footer .column .socials a {
+  color: #ccc;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  font-size: 1.25rem;
+  border-radius: 100%;
+  transition: .3s;
+}
+
+footer .column .socials a:hover {
+  color: #fff;
+  background-color: #ff09e6;
+  border-color: #ff09e6;
+}
+
+footer .column h4 {
+  margin: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: right;
+}
+
+footer .column > a {
+  display: block;
+  color: #ccc;
+  margin: 1rem;
+  transition: .3s;
+  text-align: right;
+}
+
+footer .column > a:hover {
+  color: #ff09e6;
+}
+
+.copyright {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+  font-size: .8rem;
+  text-align: center;
+}
+
+@media (width < 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  header {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  header .image {
+    grid-area: 1/1/2/2;
+  }
+
+  .features, .pricing {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    width: 100%;
+  }
+
+  footer {
+    grid-template-columns: 1fr 200px;
+  }
+}
+
+@media (width < 600px) {
+  header .image: :before {
+    display: none;
+  }
+
+  .container {
+    overflow-x: hidden;
+  }
+
+  .features, .pricing {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center; /* Center cards horizontally */
+  }
+
+  footer {
+    grid-template-columns: 1fr 150px;
+  }
+}
+
+@media (width < 600px) {
+  header .image: :before {
+    display: none;
+  }
+
+  .features, .pricing {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center; /* Center cards horizontally */
+  }
+
+  footer {
+    grid-template-columns: 1fr 150px;
+  }
+}
+
+@media (width < 600px) {
+  header .image: :before {
+    display: none;
+  }
+
+  .pricing, .card button {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center; /* Center cards horizontally */
+    width: 270px;
+  }
+
+  footer {
+    grid-template-columns: 1fr 150px;
+  }
+}
+
+@media (width < 600px) {
+  header .image: :before {
+    display: none;
+  }
+
+  .column {
+    visibility: hidden;
+  }
+
+  .footer container {
+    visibility: hidden;
+  }
+  .footer {
+    visibility: hidden;
+  }
+
+  .column p {
+    visibility: hidden;
+  }
+
+  .column socials a {
+    visibility: hidden;
+  }
+
+  .column .logo {
+    visibility: hidden;
+  }
+
+  .column h4 {
+    visibility: hidden;
+  }
+
+  .column a {
+    visibility: hidden;
+  }
+  footer {
+    visibility: hidden;
+    grid-template-columns: 1fr 150px;
+  }
+}
+.card {
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: -10px;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointurl('../images/cursor.png'), default;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(54, 55, 62);
+  border: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #545765;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #016720d1;
+}
+
+.image img {
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.7);
+  animation: floatAnimation 2s ease-in-out infinite alternate;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY();
+  }
+
+  100% {
+    transform: translateY(-15px);
+  }
+}
+
+.card .content h4 {
+  color: #a602e7d1;
+}
+
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+  html, body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+}
+
+select:hover {
+  border-color: #00098cd1; 
+}
+
+
+</style>
+<dy>
+    <div class="scrollbar-container">
+        <div class="scrollbar-thumb"></div>
+    </div>
+    <nav>
+        <div class="nav-logo">
+            <div class="logo">
+                <a href="/login">
+                    <img src="{{ url_for('static', filename='logo.png') }}">
+                </a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="link"><a href="#home">Home</a></li>
+            <li id="link1" class="link"><a href="#pricing">Pricing</a></li>
+            <li id="link2" class="link"><a href="#About">About</a></li>
+        </ul>
+        <a class="btn" href="/login">Join Prime-service</a>
+    </nav>
+    <header id="home" class="container">
+        <div class="content">
+            <span class="blur"></span>
+            <span class="blur"></span>
+            <h1>Welcome to <span>Prime</span></h1>
+            <p>The new, The best</p>
+            <button class="btn" href="#pricing" onclick="window.location.href='#pricing'" ><i class="fa-solid fa-rocket"></i> Get Started </button>
+        </div>
+        <div class="image">
+            <img src="{{ url_for('static', filename='pic.jpg') }}">
+        </div>
+    </header>
+    <section id="pricing" class="container">
+        <h2 class="header">Prime plans</h2>
+        <p class="sub-header">Please choose our plan</p>
+        <div class="pricing">
+            <div class="card">
+                <div class="content">
+                    <h4>Prime plan #1</h4>
+                    <h3 id="price_joiner">60.00$</h3>
+                    <p><i class="ri-checkbox-circle-line"></i> Full-Undetected</p>
+                    <p><i class="ri-checkbox-circle-line"></i> web-panel support</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Best choice</p>
+                </div>
+                <select id="licenseSelect_joiner">
+                    <option value="" disabled="" selected="">Choose option</option>
+                    <option value="sourcecode_joiner" data-sellix-product="665a5dfb1c522">File and panel</option>
+                </select>
+                <button class="btn" id="buyButton_joiner"><i class="fi fi-rr-shopping-cart-add"></i> Buy Now</button>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h4>Prime plan #2</h4>
+                    <h3 id="price_grabber">30.00$</h3>
+                    <p><i class="ri-checkbox-circle-line"></i> Can't run at virustortal</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Discord C2</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Cheap Prices</p>
+                </div>
+                <select id="licenseSelect_grabber">
+                    <option value="" disabled="" selected="">Choose option</option>
+                    <option value="grabber_exe" data-price="10,00" data-sellix-product="665b27b30a5aa">Builder using web panel</option>
+                    </select>
+                <button class="btn" id="buyButton_grabber"><i class="fi fi-rr-shopping-cart-add"></i> Buy Now</button>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h4>Prime plan #3</h4>
+                    <h3 id="price_grabber">50.00$</h3>
+                    <p><i class="ri-checkbox-circle-line"></i> Full-Undetected</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Discord C2</p>
+                    <p><i class="ri-checkbox-circle-line"></i> Good Choice</p>
+                </div>
+                <select id="licenseSelect_grabber">
+                    <option value="" disabled="" selected="">Choose option</option>
+                    <option value="grabber_exe" data-price="10,00" data-sellix-product="665b27b30a5aa">Builder using web panel</option>
+                    </select>
+                <button class="btn" id="buyButton_grabber"><i class="fi fi-rr-shopping-cart-add"></i> Buy Now</button>
+            </div>
+    </section>
+    <section id="About" class="container">
+        <div class="container">
+            <h2 class="header">About Us</h2>
+            <p class="sub-header">We are New grabber from new developer.</p>
+            <p class="sub-header">But do not afraid of new developers.</p>
+            <p class="sub-header">We have Own FUD method and good web-panel</p>
+    </section">
+    <footer class="container">
+        <span class="blur"></span>
+        <span class="blur"></span>
+        <div class="column">
+            <div class="logo">
+                <a href="https://PrimeStealer.xyz">
+                    <img src="{{ url_for('static', filename='logo.png') }}">
+                </a>
+            </div>
+            <p>t.me/Prime-service</p>
+            <div class="socials">
+                <a href="https://discord.gg/Prime" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://t.me/prime-grabber" target="_blank"><i class="fa-brands fa-discord"></i></a>
+            </div>
+        </div>
+        <div class="column">
+            <h4>Developer</h4>
+            <a class="sub-header" href="https://t.me/5krq">5krq</a>
+        </div>
+        <div class="column">
+            <h4>Sections</h4>
+            <a href="#home">Home</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#About">About</a>
+        </div>
+    </footer>
+    <div class="copyright">
+        Copyright © 2024 Prime-Service. All Rights Reserved.
+    </div>
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+// 애니메이션이 적용될 모든 요소에 observer 적용
+document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    </script>
+</body>
+
+</html>
